@@ -14,15 +14,18 @@
 // };
 
 // export default UserProfile;
-
+import React, { useContext } from "react";
+import UserContext from "./UserContext";
 import PropTypes from "prop-types";
 import "./UserProfile.css";
-const UserProfile = ({ name, age, bio }) => {
+const UserProfile = () => {
+  const userData = useContext(UserContext);
+
   return (
     <div className="user-profile">
-      <h2>{name}</h2>
-      <p>Age: {age}</p>
-      <p>{bio}</p>
+      <h2>{userData.name}</h2>
+      <p>{userData.age}</p>
+      <p>{userData.bio}</p>
     </div>
   );
 };
