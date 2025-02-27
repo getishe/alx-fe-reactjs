@@ -1,16 +1,15 @@
 import React from "react";
+import "./Header.css";
+
 function Header() {
   return (
-    <header
-      style={{
-        backgroundColor: "navy",
-        color: "white",
-        textAlign: "center",
-        padding: "10px",
-        margin: "10px",
-      }}
-    >
-      <h1> My favorites cities</h1>
+    <header className="header">
+      <h1>My Favorite Cities</h1>
+      <nav className="nav-menu">
+        <a href="#home">Home</a>
+        <a href="#cities">Cities</a>
+        <a href="#about">About</a>
+      </nav>
     </header>
   );
 }
