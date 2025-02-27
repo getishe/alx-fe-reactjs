@@ -1,0 +1,23 @@
+.header {
+  background-color: navy;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.nav-menu {
+  margin-top: 1rem;
+}
+
+.nav-menu a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem;
+}
+
+.nav-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
