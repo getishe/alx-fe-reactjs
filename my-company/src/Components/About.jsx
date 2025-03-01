@@ -1,7 +1,7 @@
 import React from "react";
 
 function About() {
-  // console.log("About component rendered");
+  console.log("About component rendered");
   return <div>About Page</div>;
 }
 
