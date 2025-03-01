@@ -1,11 +1,11 @@
-function Footer() {
+const Footer = () => {
   return (
     <footer
-      style={{ backgroundColor: "lightblue", padding: "10px", margin: "10px" }}
+      style={{ background: "#f0f0f0", padding: "1rem", marginTop: "2rem" }}
     >
-      <p>© 2023 City Lovers</p>
+      <p>© 2024 My React App. All rights reserved.</p>
     </footer>
   );
-}
+};
 
 export default Footer;

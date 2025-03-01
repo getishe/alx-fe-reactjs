@@ -1,11 +1,10 @@
-function MainContent() {
+const MainContent = () => {
   return (
-    <main style={{ padding: "10px", margin: "10px" }}>
-      <p style={{ color: "blue" }}>
-        I love to visit New York, Paris, and Tokyo.
-      </p>
+    <main style={{ padding: "1rem" }}>
+      <h3>Main Content</h3>
+      <p>This is the main content of the application.</p>
     </main>
   );
-}
+};
 
 export default MainContent;
