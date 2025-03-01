@@ -1,39 +1,29 @@
-// const UserProfile = (props) => {
-//   return (
-//     <div style={{ border: "1px solid gray", padding: "10px", margin: "10px" }}>
-//       <h2 style={{ color: "blue" }}>{props.name}</h2>
-//       <p>
-//         Age: <span style={{ fontWeight: "bold" }}> {props.age}</span>
-//       </p>
-//       <p>
-//         {" "}
-//         Bio: <span style={{ fontWeight: "bold" }}>{props.bio} </span>
-//       </p>
-//     </div>
-//   );
-// };
-
-// export default UserProfile;
-import React, { useContext } from "react";
+import { useContext } from "react";
 import UserContext from "./UserContext";
-import PropTypes from "prop-types";
-import "./UserProfile.css";
-const UserProfile = () => {
-  const userData = useContext(UserContext);
 
+const UserProfile = () => {
+  const UserData = useContext(UserContext);
+  if (!UserData || !UserData.length) {
+    return <div>No user data available</div>;
+  }
+
+  // Access the second user in the array (Alice's Data )
+  const user = UserData[0];
+  const aliceData = UserData[1];
   return (
-    <div className="user-profile">
-      <h2>{userData.name}</h2>
-      <p>{userData.age}</p>
-      <p>{userData.bio}</p>
+    <div
+      style={{ border: "1px solid #ccc", padding: "1rem", margin: "1rem 0" }}
+    >
+      <h3>User Profile</h3>
+      <p>Name: {user.name}</p>
+      <p>bio: {user.bio}</p>
+      <p>email: {user.email}</p>
+      <h3>Alice name</h3>
+      <p>Name: {aliceData.name}</p>
+      <p>Age: {aliceData.age}</p>
+      <p>Bio: {aliceData.bio}</p>
     </div>
   );
-};
-
-UserProfile.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.string.isRequired,
-  bio: PropTypes.string.isRequired,
 };
 
 export default UserProfile;

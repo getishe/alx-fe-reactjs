@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import { useState } from "react";
 import WelcomeMessage from "./components/WelcomeMessage";
 import Header from "./components/Header";
 import MainContent from "./components/MainContent";
@@ -6,34 +6,45 @@ import Footer from "./components/Footer";
 import UserProfile from "./components/UserProfile";
 import Counter from "./components/Counter";
 import UserContext from "./components/UserContext";
-// import UserDetails from "./components/UserDetails";
+import UserDetails from "./components/UserDetails";
 
 function App() {
-  const userData = {
-    name: "John",
-    age: 30,
-    bio: "Software developer",
-  };
+  const [userData] = useState({
+    name: "John Doe",
+    bio: "Software Developer",
+    email: "john@example.com",
+  });
+
+  const [anotherData] = useState({
+    name: "Alice",
+    age: 28,
+    bio: "Web Designer",
+  });
+
+  //combine both user data into an array or object
+
+  const combinedUserData = [userData, anotherData];
+
   return (
-    <>
-      <div>
-        <WelcomeMessage />
-        <Header />
+    <div style={{ padding: "20px" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <WelcomeMessage name="Visitor" />
+        <Header title="My React App" />
       </div>
-      <div>
+      <div style={{ marginBottom: "20px" }}>
         <MainContent />
-        <UserContext.Provider value={userData}>
-          <UserProfile name="Alice" age="25" bio="I love cats" />
-          {/* <UserDetails /> */}
+        <UserContext.Provider value={combinedUserData}>
+          <UserProfile />
+          <UserDetails />
         </UserContext.Provider>
       </div>
-      <div>
-        <Counter />
+      <div style={{ marginBottom: "20px" }}>
+        <Counter initialCount={0} />
       </div>
       <div>
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
 
