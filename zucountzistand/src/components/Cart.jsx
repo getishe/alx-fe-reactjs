@@ -1,41 +1,21 @@
 import React from "react";
+import useStore from "../store/useStore";
 
-function Cart({ cart, setCart }) {
+function Cart() {
+  const { cart, removeFromCart, clearCart } = useStore();
+
   return (
     <div>
-      {/* Map through the cart array and render each product */}
       {cart?.map((product) => (
         <div key={product.id}>
-          {/* Display product name */}
           <h2>{product.name} Product</h2>
-          {/* Display product price */}
           <h3>{product.price} Price</h3>
-          {/* Display product description */}
           <p>{product.description} description</p>
-
-          {/* Button to remove the product from the cart */}
-          <button
-            onClick={() => setCart(cart.filter((p) => p.id !== product.id))}
-          >
-            Removes
-          </button>
-
-          {/* Alternative button implementation (commented out) */}
-          {/* <button
-            onClick={() =>
-              setCart((prevCart) =>
-                prevCart.filter((p) => p.id !== product.id)
-              )
-            }
-          >
-            Remove from cart
-          </button> */}
+          <button onClick={() => removeFromCart(product.id)}>Removes</button>
         </div>
       ))}
 
-      {cart.length > 0 && (
-        <button onClick={() => setCart([])}>Clear button </button>
-      )}
+      {cart.length > 0 && <button onClick={clearCart}>Clear button</button>}
     </div>
   );
 }
