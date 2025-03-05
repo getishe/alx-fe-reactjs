@@ -1,10 +1,10 @@
 import React from "react";
 
-function Cart({ cart, setCart }) {
+function AddProduct({ products, setCart }) {
   return (
     <div>
-      {/* Map through the cart array and render each product */}
-      {cart?.map((product) => (
+      {/* Map through the products array and render each product */}
+      {products?.map((product) => (
         <div key={product.id}>
           {/* Display product name */}
           <h2>{product.name} Product</h2>
@@ -13,31 +13,25 @@ function Cart({ cart, setCart }) {
           {/* Display product description */}
           <p>{product.description} description</p>
 
-          {/* Button to remove the product from the cart */}
-          <button
-            onClick={() => setCart(cart.filter((p) => p.id !== product.id))}
-          >
-            Removes
+          {/* Button to add the product to the cart */}
+          <button onClick={() => setCart((cart) => [...cart, product])}>
+            Add to cart
           </button>
 
           {/* Alternative button implementation (commented out) */}
           {/* <button
             onClick={() =>
-              setCart((prevCart) =>
-                prevCart.filter((p) => p.id !== product.id)
+              setProducts((prevProducts) =>
+                prevProducts.filter((p) => p.id !== product.id)
               )
             }
           >
-            Remove from cart
+            Delete
           </button> */}
         </div>
       ))}
-
-      {cart.length > 0 && (
-        <button onClick={() => setCart([])}>Clear button </button>
-      )}
     </div>
   );
 }
 
-export default Cart;
+export default AddProduct;
