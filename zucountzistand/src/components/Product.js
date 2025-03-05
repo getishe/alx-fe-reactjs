@@ -1,4 +1,6 @@
+// Define array of product objects with sample data
 const PRODUCTS = [
+  // Each product has an id, name, price, and description
   {
     id: 1,
     name: "Product 1",
