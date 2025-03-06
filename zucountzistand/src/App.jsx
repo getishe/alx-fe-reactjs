@@ -1,6 +1,7 @@
 import "./App.css";
 import Addproduct from "./components/Addproduct";
 import Cart from "./components/Cart";
+import Counter from "./components/Counter";
 import useStore from "./store/useStore";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <>
           <Addproduct />
           <Cart />
+          <Counter />
         </>
       )}
     </div>
