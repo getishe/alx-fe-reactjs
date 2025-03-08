@@ -24,6 +24,8 @@ const useRecipeStore = create((set, get) => ({
   favorites: [], // Array to hold user's favorite recipe IDs
   recommendations: [], // Array for storing personalized recommendations
   lastFavoriteDate: null,
+  feedback: [],
+  testMode: false,
 
   // Existing actions
   addRecipe: (newRecipe) =>
@@ -65,12 +67,16 @@ const useRecipeStore = create((set, get) => ({
   initializeFilteredRecipes: () =>
     set((state) => ({ filteredRecipes: state.recipes })),
 
-  // Enhanced favorite management
+  // Enhanced favorite management with documentation
   addFavorite: (recipeId) =>
-    set((state) => ({
-      favorites: [...state.favorites, recipeId],
-      lastFavoriteDate: new Date().toISOString(),
-    })),
+    set((state) => {
+      // Don't add if already in favorites
+      if (state.favorites.includes(recipeId)) return state;
+      return {
+        favorites: [...state.favorites, recipeId],
+        lastFavoriteDate: new Date().toISOString(),
+      };
+    }),
 
   removeFavorite: (recipeId) =>
     set((state) => ({
@@ -89,25 +95,35 @@ const useRecipeStore = create((set, get) => ({
       return { favorites: sortedFavorites };
     }),
 
-  // Enhanced recommendation system
+  // Recommendation system with weighted scoring
   generateRecommendations: () =>
     set((state) => {
+      // Calculate user preferences based on favorites
       const userPreferences = state.favorites
         .map((id) => state.recipes.find((r) => r.id === id))
         .filter(Boolean);
 
-      const categoryCount = userPreferences.reduce((acc, recipe) => {
+      // Weight categories based on user's favorites
+      const categoryWeights = userPreferences.reduce((acc, recipe) => {
         acc[recipe.category] = (acc[recipe.category] || 0) + 1;
         return acc;
       }, {});
 
-      const recommended = state.recipes
+      // Calculate recommendation scores using multiple factors
+      const recommendationScores = state.recipes
         .filter((recipe) => !state.favorites.includes(recipe.id))
-        .sort((a, b) => {
-          const scoreA = (categoryCount[a.category] || 0) + a.rating;
-          const scoreB = (categoryCount[b.category] || 0) + b.rating;
-          return scoreB - scoreA;
-        })
+        .map((recipe) => ({
+          ...recipe,
+          // Popularity factor
+          score:
+            (categoryWeights[recipe.category] || 0) * 2 + // Category preference
+            recipe.rating + // Base rating
+            (recipe.reviews?.length || 0) * 0.5,
+        }));
+
+      // Sort and return top 5 recommendations
+      const recommended = recommendationScores
+        .sort((a, b) => b.score - a.score)
         .slice(0, 5);
 
       return { recommendations: recommended };
@@ -125,6 +141,14 @@ const useRecipeStore = create((set, get) => ({
     const state = get();
     return state.recommendations;
   },
+
+  addFeedback: (feedback) =>
+    set((state) => ({
+      feedback: [...state.feedback, feedback],
+    })),
+
+  // Add test helpers
+  setTestMode: (enabled) => set({ testMode: enabled }),
 }));
 
 export default useRecipeStore;
