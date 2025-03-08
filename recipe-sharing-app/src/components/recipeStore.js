@@ -98,18 +98,7 @@
 import { create } from "zustand";
 
 const useRecipeStore = create((set, get) => ({
-  recipes: [
-    {
-      id: 1,
-      title: "Spaghetti Carbonara",
-      description: "Classic Italian pasta dish with eggs, cheese, and bacon",
-    },
-    {
-      id: 2,
-      title: "Chicken Curry",
-      description: "Spicy Indian curry with tender chicken pieces",
-    },
-  ],
+  recipes: [],
   searchTerm: "",
   filteredRecipes: [],
   favorites: [], // Array to hold user's favorite recipe IDs
