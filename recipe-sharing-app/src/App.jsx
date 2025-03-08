@@ -51,8 +51,8 @@ import { Suspense } from "react";
 import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeDetails from "./components/RecipeDetails";
-import Favorites from "./components/Favorites";
-import Recommendations from "./components/Recommendations";
+import FavoritesList from "./components/FavoritesList ";
+import RecommendationsList from "./components/RecommendationsList ";
 
 const App = () => {
   return (
@@ -100,8 +100,8 @@ const App = () => {
             <Route path="/" element={<RecipeList />} />
             <Route path="/add" element={<AddRecipeForm />} />
             <Route path="/recipe/:id" element={<RecipeDetails />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/recommendations" element={<Recommendations />} />
+            <Route path="/favorites" element={<FavoritesList />} />
+            <Route path="/recommendations" element={<RecommendationsList />} />
           </Routes>
         </Suspense>
       </div>
