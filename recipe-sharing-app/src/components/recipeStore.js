@@ -110,41 +110,36 @@ const useRecipeStore = create((set, get) => ({
       description: "Spicy Indian curry with tender chicken pieces",
     },
   ],
-  searchTerm: "",
-  filteredRecipes: [],
   favorites: [],
   recommendations: [],
+  searchTerm: "",
+  filteredRecipes: [],
 
   // Favorites management
-  addFavorite: (recipe) =>
+  addToFavorites: (recipeId) =>
     set((state) => ({
-      favorites: [...state.favorites, recipe],
+      favorites: [...state.favorites, recipeId],
     })),
 
-  removeFavorite: (recipeId) =>
+  removeFromFavorites: (recipeId) =>
     set((state) => ({
-      favorites: state.favorites.filter((recipe) => recipe.id !== recipeId),
+      favorites: state.favorites.filter((id) => id !== recipeId),
     })),
 
   // Recommendations system
   generateRecommendations: () =>
     set((state) => {
-      const userFavoriteCategories = state.favorites.map((recipe) =>
-        recipe.title.toLowerCase()
-      );
-      const recommended = state.recipes.filter(
-        (recipe) =>
-          !state.favorites.some((fav) => fav.id === recipe.id) &&
-          userFavoriteCategories.some(
-            (category) =>
-              recipe.title.toLowerCase().includes(category) ||
-              recipe.description.toLowerCase().includes(category)
-          )
-      );
-      return { recommendations: recommended };
+      const userFavorites = state.favorites;
+      const recommendedRecipes = state.recipes.filter((recipe) => {
+        // Simple recommendation logic:
+        // 1. Recipe is not already in favorites
+        // 2. Random selection based on some criteria
+        return !userFavorites.includes(recipe.id) && Math.random() > 0.5;
+      });
+      return { recommendations: recommendedRecipes };
     }),
 
-  // Existing functionality
+  // Existing recipe management
   addRecipe: (newRecipe) =>
     set((state) => ({
       recipes: [...state.recipes, newRecipe],
@@ -160,10 +155,14 @@ const useRecipeStore = create((set, get) => ({
   deleteRecipe: (recipeId) =>
     set((state) => ({
       recipes: state.recipes.filter((recipe) => recipe.id !== recipeId),
+      // Also remove from favorites if present
+      favorites: state.favorites.filter((id) => id !== recipeId),
+      recommendations: state.recommendations.filter(
+        (recipe) => recipe.id !== recipeId
+      ),
     })),
 
-  setRecipes: (recipes) => set({ recipes }),
-
+  // Search and filter functionality
   setSearchTerm: (term) => {
     set({ searchTerm: term });
     get().filterRecipes();
@@ -180,8 +179,12 @@ const useRecipeStore = create((set, get) => ({
       ),
     })),
 
+  // Initialize filtered recipes
   initializeFilteredRecipes: () =>
-    set((state) => ({ filteredRecipes: state.recipes })),
+    set((state) => ({
+      filteredRecipes: state.recipes,
+      recommendations: state.recipes.slice(0, 2), // Initial recommendations
+    })),
 }));
 
 export default useRecipeStore;
