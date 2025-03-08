@@ -118,7 +118,7 @@
 import { Link } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
 import { useEffect } from "react";
-
+import FavoriteButton from "./FavoriteButton";
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
   const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
@@ -235,6 +235,8 @@ const RecipeList = () => {
               >
                 View Details
               </Link>
+
+              <FavoriteButton recipeId={recipe.id} />
             </div>
           )
         )}
