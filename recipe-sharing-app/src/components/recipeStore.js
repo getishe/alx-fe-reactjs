@@ -112,6 +112,19 @@ const useRecipeStore = create((set, get) => ({
 
       return { recommendations: recommended };
     }),
+
+  // Add these selectors
+  getFavoriteRecipes: () => {
+    const state = get();
+    return state.recipes.filter((recipe) =>
+      state.favorites.includes(recipe.id)
+    );
+  },
+
+  getRecommendedRecipes: () => {
+    const state = get();
+    return state.recommendations;
+  },
 }));
 
 export default useRecipeStore;
