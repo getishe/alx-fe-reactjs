@@ -6,11 +6,17 @@ const useRecipeStore = create((set, get) => ({
       id: 1,
       title: "Spaghetti Carbonara",
       description: "Classic Italian pasta dish with eggs, cheese, and bacon",
+      category: "Italian",
+      rating: 4.5,
+      dateAdded: new Date().toISOString(),
     },
     {
       id: 2,
       title: "Chicken Curry",
       description: "Spicy Indian curry with tender chicken pieces",
+      category: "Indian",
+      rating: 4.2,
+      dateAdded: new Date().toISOString(),
     },
   ],
   searchTerm: "",
@@ -59,7 +65,7 @@ const useRecipeStore = create((set, get) => ({
   initializeFilteredRecipes: () =>
     set((state) => ({ filteredRecipes: state.recipes })),
 
-  // New favorite-related actions
+  // Enhanced favorite management
   addFavorite: (recipeId) =>
     set((state) => ({
       favorites: [...state.favorites, recipeId],
@@ -83,23 +89,25 @@ const useRecipeStore = create((set, get) => ({
       return { favorites: sortedFavorites };
     }),
 
-  // New recommendations-related action
+  // Enhanced recommendation system
   generateRecommendations: () =>
     set((state) => {
-      // Improved recommendation logic using categories and ratings
       const userPreferences = state.favorites
         .map((id) => state.recipes.find((r) => r.id === id))
         .filter(Boolean);
 
+      const categoryCount = userPreferences.reduce((acc, recipe) => {
+        acc[recipe.category] = (acc[recipe.category] || 0) + 1;
+        return acc;
+      }, {});
+
       const recommended = state.recipes
-        .filter(
-          (recipe) =>
-            !state.favorites.includes(recipe.id) &&
-            (userPreferences.some(
-              (pref) => pref.category === recipe.category
-            ) ||
-              recipe.rating >= 4)
-        )
+        .filter((recipe) => !state.favorites.includes(recipe.id))
+        .sort((a, b) => {
+          const scoreA = (categoryCount[a.category] || 0) + a.rating;
+          const scoreB = (categoryCount[b.category] || 0) + b.rating;
+          return scoreB - scoreA;
+        })
         .slice(0, 5);
 
       return { recommendations: recommended };
