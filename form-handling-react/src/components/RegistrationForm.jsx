@@ -19,10 +19,8 @@ const RegistrationForm = () => {
   }); // Added username error
 
   const handleChange = (event) => {
-    const { username, value } = event.target;
-    // setFormData({ ...formData, [name]: value });
-
-    setFormData((prevState) => ({ ...prevState, [username]: value }));
+    const { name, value } = event.target; // updated destructuring to use "name" and "value"
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
     console.log(formData);
   };
 
