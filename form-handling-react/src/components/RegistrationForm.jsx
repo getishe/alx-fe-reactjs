@@ -6,13 +6,13 @@ import { useState } from "react";
  */
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    // name: "",
     username: "", // Added username field
     email: "",
     password: "",
   });
   const [errors, setErrors] = useState({
-    name: "",
+    // name: "",
     username: "",
     email: "",
     password: "",
@@ -30,10 +30,10 @@ const RegistrationForm = () => {
     const newErrors = {};
     let isValid = true;
 
-    if (!formData.name) {
-      newErrors.name = "Name is required";
-      isValid = false;
-    }
+    // if (!formData.name) {
+    //   newErrors.name = "Name is required";
+    //   isValid = false;
+    // }
 
     if (!formData.username) {
       // Added username validation
@@ -69,13 +69,13 @@ const RegistrationForm = () => {
       console.log("Form submitted:", formData);
 
       // Reset the form after submission
-      setFormData({ name: "", username: "", email: "", password: "" }); // Reset username field
+      setFormData({ username: "", email: "", password: "" }); // Reset username field
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      {/* <input
         className="name"
         type="text"
         name="name"
@@ -83,7 +83,7 @@ const RegistrationForm = () => {
         value={formData.name}
         onChange={handleChange}
       />
-      {errors.name && <div>{errors.name}</div>}
+      {errors.name && <div>{errors.name}</div>} */}
       <input
         className="username"
         type="text"
