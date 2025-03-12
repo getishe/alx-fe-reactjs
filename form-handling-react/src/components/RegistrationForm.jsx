@@ -7,10 +7,16 @@ import { useState } from "react";
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
     name: "",
+    username: "", // Added username field
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({ name: "", email: "", password: "" });
+  const [errors, setErrors] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  }); // Added username error
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -26,6 +32,12 @@ const RegistrationForm = () => {
 
     if (!formData.name) {
       newErrors.name = "Name is required";
+      isValid = false;
+    }
+
+    if (!formData.username) {
+      // Added username validation
+      newErrors.username = "Username is required";
       isValid = false;
     }
 
@@ -57,7 +69,7 @@ const RegistrationForm = () => {
       console.log("Form submitted:", formData);
 
       // Reset the form after submission
-      setFormData({ name: "", email: "", password: "" });
+      setFormData({ name: "", username: "", email: "", password: "" }); // Reset username field
     }
   };
 
@@ -72,7 +84,16 @@ const RegistrationForm = () => {
         onChange={handleChange}
       />
       {errors.name && <div>{errors.name}</div>}
-
+      <input
+        className="username"
+        type="text"
+        name="username"
+        placeholder="username"
+        value={formData.username} // Added username input
+        onChange={handleChange}
+      />
+      {errors.username && <div>{errors.username}</div>} // Added username error
+      display
       <input
         className="email"
         type="email"
