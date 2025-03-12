@@ -19,10 +19,10 @@ const RegistrationForm = () => {
   }); // Added username error
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { username, value } = event.target;
     // setFormData({ ...formData, [name]: value });
 
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [username]: value }));
     console.log(formData);
   };
 
