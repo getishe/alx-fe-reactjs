@@ -8,7 +8,7 @@ function Footer() {
           padding: "10px",
         }}
       >
-        © 2023 City Lovers
+        © 2023 City Lovers footer
       </p>
     </footer>
   );
