@@ -1,20 +1,40 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import { AuthProvider } from "./context/AuthContext";
+import Home from "./components/Home";
+import Login from "./components/login";
+import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
+import Profile from "./components/Profile";
+import ProfileDetails from "./components/ProfileDetails";
+import ProfileSettings from "./components/ProfileSettings";
+import Post from "./components/Posts";
+import PostDetails from "./components/PostDetails";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/details" element={<ProfileDetails />} />
+          <Route path="/settings" element={<ProfileSettings />} />
+          <Route path="/posts" element={<Post />} />
+          {/* Dynamic Route  for blog posts */}
+          <Route path="/posts/:postId" element={<PostDetails />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
-
-const Home = () => <h1>wle</h1>;
-const About = () => <h1>At</h1>;
 
 export default App;
