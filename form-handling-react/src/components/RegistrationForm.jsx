@@ -87,7 +87,7 @@ const RegistrationForm = () => {
         type="text"
         name="username"
         placeholder="username"
-        value={formData.username} // Added username input
+        value={username} // Added username input
         onChange={handleChange}
       />
       {errors.username && <div>{errors.username}</div>} // Added username error
@@ -97,7 +97,7 @@ const RegistrationForm = () => {
         type="email"
         name="email"
         placeholder="email"
-        value={formData.email}
+        value={email}
         // style={{ color: "red" }}
         onChange={handleChange}
       />
@@ -107,7 +107,7 @@ const RegistrationForm = () => {
         type="password"
         name="password"
         placeholder="password"
-        value={formData.password}
+        value={password}
         onChange={handleChange}
       />
       {errors.password && <div>{errors.password}</div>}
