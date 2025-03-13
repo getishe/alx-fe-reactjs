@@ -4,13 +4,11 @@ import React from "react";
 import FormikForm from "./components/formikForm";
 function App() {
   return (
-    <>
+    <div className="App">
       <h1>Form Handling with React</h1>
       <FormikForm />
-      <h1>head</h1>
-
-      <h1>head</h1>
-    </>
+      {/* <RegistrationForm /> */}
+    </div>
   );
 }
 
