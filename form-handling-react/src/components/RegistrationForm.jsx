@@ -33,20 +33,20 @@ const RegistrationForm = () => {
     //   isValid = false;
     // }
 
-    if (!formData.username) {
+    if (!username) {
       // Added username validation
       newErrors.username = "Username is required";
       isValid = false;
     }
 
-    if (!formData.email) {
+    if (!email) {
       newErrors.email = "Email is required";
       isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = "Invalid email format";
       isValid = false;
     }
-    if (!formData.password) {
+    if (!password) {
       newErrors.password = "Password is required";
       isValid = false;
     } else if (formData.password.length < 8) {
