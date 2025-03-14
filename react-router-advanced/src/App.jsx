@@ -9,7 +9,8 @@ import Profile from "./components/Profile";
 import ProfileDetails from "./components/ProfileDetails";
 import ProfileSettings from "./components/ProfileSettings";
 import Post from "./components/Posts";
-import PostDetails from "./components/PostDetails";
+import BlogPost from "./components/BlogPost";
+// import PostDetails from "./components/PostDetails";
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           <Route path="/settings" element={<ProfileSettings />} />
           <Route path="/posts" element={<Post />} />
           {/* Dynamic Route  for blog posts */}
-          <Route path="/posts/:postId" element={<PostDetails />} />
+          <Route path="/blog/:postId" element={<BlogPost />} />
         </Routes>
       </Router>
     </AuthProvider>
