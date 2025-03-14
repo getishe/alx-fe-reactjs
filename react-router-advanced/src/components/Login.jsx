@@ -1,23 +1,20 @@
-import React from "react";
 import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    login();
-    navigate("/profile"); // Redirect to profile after login
-  };
+function Login() {
+  const { isAuthenticated, login, logout } = useAuth();
 
   return (
     <div>
-      <h1> Login Page</h1>
-      <button onClick={handleLogin}>Login</button>
+      <h1>{isAuthenticated ? "You are logged in!" : "You are logged out!"}</h1>
+      {isAuthenticated ? (
+        <button onClick={logout}>Logout</button>
+      ) : (
+        <button onClick={login}>Login</button>
+      )}
     </div>
   );
-};
+}
+
 export default Login;
 
 // import { useState } from "react";
