@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Route, Route } from "react-router-dom";
 
 const Profile = () => {
   return (
