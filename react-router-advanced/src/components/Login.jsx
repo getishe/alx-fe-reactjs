@@ -1,7 +1,12 @@
 import { useAuth } from "../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 function Login() {
   const { isAuthenticated, login, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    login();
+    navigate("/profile"); // Redirect to profile after login
+  };
 
   return (
     <div>
@@ -9,7 +14,7 @@ function Login() {
       {isAuthenticated ? (
         <button onClick={logout}>Logout</button>
       ) : (
-        <button onClick={login}>Login</button>
+        <button onClick={handleLogin}>Login</button>
       )}
     </div>
   );

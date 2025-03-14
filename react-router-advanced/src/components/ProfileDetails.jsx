@@ -1,12 +1,7 @@
 import React from "react";
 
 function ProfileDetails() {
-  return (
-    <div>
-      ProfileDetails
-      <p>view some posts: {postId}</p>
-    </div>
-  );
+  return <div>ProfileDetails</div>;
 }
 
 export default ProfileDetails;
