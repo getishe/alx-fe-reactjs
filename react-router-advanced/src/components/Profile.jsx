@@ -1,6 +1,6 @@
 import React from "react";
-import { Outlet, Link, Route, Routes } from "react-router-dom";
-
+// import { Outlet, Link, Route, Routes } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 const Profile = () => {
   return (
     <div>
@@ -11,10 +11,10 @@ const Profile = () => {
       </nav>
 
       {/* Render child routes */}
-      <Routes>
+      {/* <Routes>
         <Route path="details" element={<ProfileDetails />} />
         <Route path="settings" element={<ProfileSettings />} />
-      </Routes>
+      </Routes> */}
       <Outlet />
     </div>
   );
