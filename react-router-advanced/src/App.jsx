@@ -31,7 +31,7 @@ function App() {
           <Route path="/settings" element={<ProfileSettings />} />
           <Route path="/posts" element={<Post />} />
           {/* Dynamic Route  for blog posts */}
-          <Route path="/blog/:postId" element={<BlogPost />} />
+          <Route path="/blog/:blogId" element={<BlogPost />} />
         </Routes>
       </Router>
     </AuthProvider>
