@@ -8,11 +8,16 @@ function Login() {
     navigate("/profile"); // Redirect to profile after login
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/"); // Redirect to home after logout
+  };
+
   return (
     <div>
       <h1>{isAuthenticated ? "You are logged in!" : "You are logged out!"}</h1>
       {isAuthenticated ? (
-        <button onClick={logout}>Logout</button>
+        <button onClick={handleLogout}>Logout</button>
       ) : (
         <button onClick={handleLogin}>Login</button>
       )}
