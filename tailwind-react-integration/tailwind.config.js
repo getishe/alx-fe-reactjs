@@ -1,12 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false, // You can keep this or modify based on your project needs
   theme: {
-    extend: {},
+    extend: {
+      // You can add custom styling here, such as colors, fonts, etc.
+    },
   },
-  variants: {
-    extend: {}, // Optional for customization
-  },
-  plugins: [],
+  plugins: [
+    // You can add Tailwind plugins here if needed.
+  ],
 };
