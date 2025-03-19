@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="hello text-2xl text-red-300 ">Hello</h1>
+        <h1 className="hello flex items-center justify-center ">Hello</h1>
       </div>
     </>
   );
