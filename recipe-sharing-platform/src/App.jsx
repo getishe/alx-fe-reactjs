@@ -1,10 +1,10 @@
 import "./App.css";
-
+import HomePage from "./components/HomePage";
 function App() {
   return (
     <>
       <div>
-        <h1 className="hello flex items-center justify-center ">Hello</h1>
+        <HomePage />
       </div>
     </>
   );
