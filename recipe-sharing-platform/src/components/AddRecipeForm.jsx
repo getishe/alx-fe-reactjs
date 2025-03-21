@@ -5,12 +5,14 @@ function AddRecipeForm() {
     title: " ",
     summary: " ",
     image: "",
+    ingredients: "",
   });
 
   const [error, setError] = useState({
     title: " ",
     summary: " ",
     image: " ",
+    ingredients: " ",
   });
 
   const handleOnchange = (event) => {
@@ -21,6 +23,8 @@ function AddRecipeForm() {
     console.log(event.target.name);
     console.log(event.target.title);
     console.log(event.target.summary);
+    console.log(event.target.image);
+    console.log(event.target.ingredients);
   };
 
   const validation = () => {
@@ -36,6 +40,9 @@ function AddRecipeForm() {
     } else if (!formData.image) {
       newErrors.image = alert("new image required");
       isValid = false;
+    } else if (!formData.ingredients) {
+      newErrors.ingredients = alert("new ingredients required");
+      isValid = false;
     }
 
     setError(newErrors);
@@ -50,7 +57,7 @@ function AddRecipeForm() {
       console.log(" for is submitted", formData);
     }
 
-    setFormData({ title: "", summary: "", image: "" });
+    setFormData({ title: "", summary: "", image: "", ingredients: "" });
   };
 
   return (
@@ -96,6 +103,14 @@ function AddRecipeForm() {
         {error.image && (
           <p className="text-slate-500 font-extrabold">{error.image}</p>
         )}
+        <label htmlFor="ingredients">Ingredients:</label>
+        <textarea
+          className="border-2 border-solid border-grey-500 rounded-lg"
+          id="ingredients"
+          name="ingredients"
+          value={formData.ingredients}
+          onChange={handleOnchange}
+        />
         <button
           type="submit"
           className="hover:shadow-lg duration-75 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
