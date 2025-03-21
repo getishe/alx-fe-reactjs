@@ -55,7 +55,7 @@ function AddRecipeForm() {
     return isValid;
   };
 
-  const handleOnSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     if (validation()) {
       alert("success");
@@ -77,7 +77,7 @@ function AddRecipeForm() {
       {/* // <div className="grid gap-6 m-2 max-w-md mx-auto p-12 hover:shadow-lg duration-75 flex items-center justify-center"> */}
       <h1>Add new recipe</h1>
 
-      <form onSubmit={handleOnSubmit} className="grid gap-3">
+      <form onSubmit={handleSubmit} className="grid gap-3">
         <label htmlFor="title">Title:</label>
 
         <input
