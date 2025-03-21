@@ -29,6 +29,7 @@ const HomePage = () => {
               <h2 className="text-xl font-semibold">{recipe.title}</h2>
               <p className="text-gray-600">{recipe.summary}</p>
               <p className="text-gray-600">{recipe.ingredients}</p>
+              <p className="text-gray-600">{recipe.steps}</p>
             </div>
           </div>
         ))}
