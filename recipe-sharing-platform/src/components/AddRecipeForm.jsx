@@ -9,7 +9,7 @@ function AddRecipeForm() {
     steps: "",
   });
 
-  const [error, setError] = useState({
+  const [errors, setErrors] = useState({
     title: " ",
     summary: " ",
     image: " ",
@@ -30,7 +30,7 @@ function AddRecipeForm() {
     console.log(event.target.steps);
   };
 
-  const validation = () => {
+  const validate = () => {
     const newErrors = {};
     let isValid = true;
 
@@ -51,13 +51,13 @@ function AddRecipeForm() {
       isValid = false;
     }
 
-    setError(newErrors);
+    setErrors(newErrors);
     return isValid;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validation()) {
+    if (validate()) {
       alert("success");
 
       console.log(" for is submitted", formData);
@@ -88,8 +88,8 @@ function AddRecipeForm() {
           value={formData.title}
           onChange={handleOnchange}
         />
-        {error.title && (
-          <p className="text-slate-500 font-extrabold">{error.title}</p>
+        {errors.title && (
+          <p className="text-slate-500 font-extrabold">{errors.title}</p>
         )}
         <label htmlFor="summary">Summary:</label>
         <textarea
@@ -99,8 +99,8 @@ function AddRecipeForm() {
           value={formData.summary}
           onChange={handleOnchange}
         />
-        {error.summary && (
-          <p className="text-slate-500 font-extrabold">{error.summary}</p>
+        {errors.summary && (
+          <p className="text-slate-500 font-extrabold">{errors.summary}</p>
         )}
 
         <label htmlFor="image">Image URL:</label>
@@ -112,8 +112,8 @@ function AddRecipeForm() {
           value={formData.image}
           onChange={handleOnchange}
         />
-        {error.image && (
-          <p className="text-slate-500 font-extrabold">{error.image}</p>
+        {errors.image && (
+          <p className="text-slate-500 font-extrabold">{errors.image}</p>
         )}
         <label htmlFor="ingredients">Ingredients:</label>
         <textarea
@@ -123,8 +123,8 @@ function AddRecipeForm() {
           value={formData.ingredients}
           onChange={handleOnchange}
         />
-        {error.ingredients && (
-          <p className="text-slate-500 font-extrabold">{error.ingredients}</p>
+        {errors.ingredients && (
+          <p className="text-slate-500 font-extrabold">{errors.ingredients}</p>
         )}
         <label htmlFor="steps">Steps:</label>
         <textarea
@@ -134,8 +134,8 @@ function AddRecipeForm() {
           value={formData.steps}
           onChange={handleOnchange}
         />
-        {error.steps && (
-          <p className="text-slate-500 font-extrabold">{error.steps}</p>
+        {errors.steps && (
+          <p className="text-slate-500 font-extrabold">{errors.steps}</p>
         )}
         <button
           type="submit"
