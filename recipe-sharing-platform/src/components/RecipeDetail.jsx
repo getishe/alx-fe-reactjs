@@ -1,7 +1,9 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const RecipeDetail = ({ recipes }) => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const recipe = recipes.find((recipe) => recipe.id === parseInt(id));
   if (!recipe) {
@@ -14,6 +16,7 @@ const RecipeDetail = ({ recipes }) => {
       .then((response) => response.json())
       .then((data) => setRecipes(data))
       .catch((error) => console.error("Error loading recipes:", error));
+    navigate("/");
   }, []);
 
   return (
@@ -25,7 +28,7 @@ const RecipeDetail = ({ recipes }) => {
         Add New Recipe
       </Link>
 
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 shadow-sm">
         <h2 className="text-xl">{recipe.title}</h2>
         <p className="text-xs">{recipe.summary}</p>
         <p className="text-gray-600">{recipe.ingredients}</p>
