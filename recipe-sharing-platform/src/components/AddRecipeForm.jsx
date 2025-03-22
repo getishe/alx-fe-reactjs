@@ -150,12 +150,16 @@ function AddRecipeForm({ onAddRecipe }) {
         {errors.steps && (
           <p className="text-slate-500 font-extrabold">{errors.steps}</p>
         )}
+
+        {/* Some thing to do */}
         <button
           type="submit"
           className="hover:shadow-lg duration-75 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Add Recipe
         </button>
+
+        {/* Some thing to do */}
       </form>
     </div>
   );
