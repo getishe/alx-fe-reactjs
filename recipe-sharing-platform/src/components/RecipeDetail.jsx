@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 const RecipeDetail = ({ recipes }) => {
   const navigate = useNavigate();
+  const [recipes, setRecipes] = useState([]); // initialize  empty array
   const { id } = useParams();
   const recipe = recipes.find((recipe) => recipe.id === parseInt(id));
   if (!recipe) {
