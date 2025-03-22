@@ -7,6 +7,15 @@ const RecipeDetail = ({ recipes }) => {
   if (!recipe) {
     return <div>Recipe not found</div>;
   }
+
+  useEffect(() => {
+    // Fetching the data from data.json (mock data)
+    fetch("/public/data.json")
+      .then((response) => response.json())
+      .then((data) => setRecipes(data))
+      .catch((error) => console.error("Error loading recipes:", error));
+  }, []);
+
   return (
     <div className="container mx-auto p-4">
       <Link
