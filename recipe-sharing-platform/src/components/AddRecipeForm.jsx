@@ -1,9 +1,10 @@
 import { useState } from "react";
-
-function AddRecipeForm() {
+import { useNavigate } from "react-router-dom";
+function AddRecipeForm({ onAddRecipe }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: " ",
-    summary: " ",
+    title: "",
+    summary: "",
     image: "",
     ingredients: "",
     steps: "",
@@ -34,19 +35,19 @@ function AddRecipeForm() {
     const newErrors = {};
     let isValid = true;
 
-    if (!formData.title) {
+    if (!formData.title.trim()) {
       newErrors.title = alert("new title required");
       isValid = false;
-    } else if (!formData.summary) {
+    } else if (!formData.summary.trim()) {
       newErrors.summary = alert("new summary required");
       isValid = false;
-    } else if (!formData.image) {
+    } else if (!formData.image.trim()) {
       newErrors.image = alert("new image required");
       isValid = false;
-    } else if (!formData.ingredients) {
+    } else if (!formData.ingredients.trim()) {
       newErrors.ingredients = alert("new ingredients required");
       isValid = false;
-    } else if (!formData.steps) {
+    } else if (!formData.steps.trim()) {
       newErrors.steps = alert("new steps required");
       isValid = false;
     }
@@ -58,18 +59,29 @@ function AddRecipeForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validate()) {
+      const newRecipe = {
+        id: Date.now(),
+        title: formData.title,
+        summary: formData.summary,
+        image: formData.image,
+        ingredients: formData.ingredients,
+        steps: formData.steps.split("\n").map((step) => step.trim()),
+      };
+
+      onAddRecipe(newRecipe);
+
+      setFormData({
+        title: "",
+        summary: "",
+        image: "",
+        ingredients: "",
+        steps: "",
+      });
       alert("success");
 
       console.log(" for is submitted", formData);
+      navigate("/");
     }
-
-    setFormData({
-      title: "",
-      summary: "",
-      image: "",
-      ingredients: "",
-      steps: "",
-    });
   };
 
   return (
@@ -106,6 +118,7 @@ function AddRecipeForm() {
         <label htmlFor="image">Image URL:</label>
         <input
           className="border-2 border-solid border-grey-500 rounded-lg"
+          src={`https://cors-anywhere.herokuapp.com/https://spoonacular.com/recipeImages/${formData.image}`}
           type="text"
           id="image"
           name="image"
