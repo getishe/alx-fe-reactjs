@@ -28,6 +28,7 @@ const RecipeDetail = ({ recipes }) => {
       <div className="container mx-auto p-4">
         <h2 className="text-xl">{recipe.title}</h2>
         <p className="text-xs">{recipe.summary}</p>
+        <p className="text-gray-600">{recipe.ingredients}</p>
         <p>{recipe.instructions} </p>
         <p>{recipe.image}</p>
       </div>
