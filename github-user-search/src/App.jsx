@@ -1,11 +1,11 @@
-import react from 'react' 
-// import './App.css'
+import Search from "./components/Search"
+import './App.css'
 function App() {
   // const [count, setCount] = useState(0)
 
   return (
   <div>
-    <h>Helffflo</h>
+    <Search />
   </div>
   )
 }
