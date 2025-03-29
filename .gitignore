@@ -30,4 +30,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # project specific
-github-user-search/.env
+
+# Environment variables
+.env
