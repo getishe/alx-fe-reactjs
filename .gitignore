@@ -23,6 +23,7 @@
 */**/.env
 !.env.example
 !*/**/.env.example
+github-user-search/.env
 
 # logs
 npm-debug.log*
