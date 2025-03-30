@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchAdvancedSearch } from "../services/githubService";
+import { fetchUserData } from "../services/githubService";
 
 const Search = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +26,7 @@ const Search = () => {
     setSearchResults([]);
 
     try {
-      const data = await fetchAdvancedSearch(
+      const data = await fetchUserData(
         formData.username.trim(),
         formData.location.trim(),
         formData.minRepos ? parseInt(formData.minRepos) : null
