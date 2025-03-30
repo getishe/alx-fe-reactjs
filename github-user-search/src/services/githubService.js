@@ -11,8 +11,6 @@ export const fetchUserData = async (username, location, minRepos) => {
     .join(" ");
 
   try {
-    console.log("Constructed Query:", query); // Log the query for debugging
-
     const response = await fetch(
       `https://api.github.com/search/users?q=${encodeURIComponent(
         query
@@ -24,11 +22,6 @@ export const fetchUserData = async (username, location, minRepos) => {
         },
       }
     );
-
-    console.log(
-      "Rate Limit Remaining:",
-      response.headers.get("x-ratelimit-remaining")
-    ); // Log rate limit
 
     if (!response.ok) {
       const error = await response.json();

@@ -4,12 +4,12 @@ import { fetchUserData } from "../services/githubService";
 const Search = () => {
   const [formData, setFormData] = useState({
     username: "",
-    location: "", // Pre-filled location for testing
+    location: "",
     minRepos: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [searchResults, setSearchResults] = useState([]); // Change userData to searchResults
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,17 +33,12 @@ const Search = () => {
       );
 
       if (data.total_count === 0) {
-        setError(`No users found. Try broadening your search criteria.
-          Example: username: "john", location: "london", repos: "5".
-          Query: "${formData.username} ${formData.location} ${formData.minRepos}"`);
+        setError("No users found. Try broadening your search criteria.");
       } else {
         setSearchResults(data.items);
       }
     } catch (err) {
-      setError(
-        `Search failed: ${err.message || "Please try different search terms"}.
-        Check your rate limit or query construction.`
-      );
+      setError("Search failed. Please try again later.");
     } finally {
       setLoading(false);
     }
