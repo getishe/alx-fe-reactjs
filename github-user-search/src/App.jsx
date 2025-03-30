@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   return (
     <Router>
-      <div>
+      <div className="text-center flex flex-col items-center justify-center min-h-screen bg-gray-100 p-2 md:p-10 sm:p-5">
         <header>
           <h1>GitHub user search</h1>
         </header>

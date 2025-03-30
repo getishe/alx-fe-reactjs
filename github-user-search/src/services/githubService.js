@@ -1,13 +1,48 @@
 import axios from "axios";
 
-const BASE_URL = "https://api.github.com";
+export const fetchAdvancedSearch = async (username, location, minRepos) => {
+  const query = [
+    username ? `${username}` : "type:user",
+    location ? `location:${location}` : "",
+    minRepos ? `repos:>=${minRepos}` : "repos:>=0",
+    "sort:repositories-desc",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
-export const fetchUserData = async (username) => {
   try {
-    const response = await axios.get(`${BASE_URL}/users/${username}`);
-    return response.data;
+    console.log("Constructed Query:", query); // Log the query for debugging
+
+    const response = await fetch(
+      `https://api.github.com/search/users?q=${encodeURIComponent(
+        query
+      )}&per_page=30`,
+      {
+        headers: {
+          Accept: "application/vnd.github.v3+json",
+          Authorization: `token ${import.meta.env.VITE_APP_GITHUB_TOKEN}`,
+        },
+      }
+    );
+
+    console.log(
+      "Rate Limit Remaining:",
+      response.headers.get("x-ratelimit-remaining")
+    ); // Log rate limit
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || "Failed to fetch");
+    }
+
+    const data = await response.json();
+    if (!data.items) {
+      throw new Error("Invalid response format");
+    }
+
+    return data;
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Search error:", error);
     throw error;
   }
 };
