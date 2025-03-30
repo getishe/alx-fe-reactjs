@@ -68,23 +68,39 @@ const Search = () => {
   };
 
   return (
+    // <div className="flex flex-col items-center justify-center min-h-screen">
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="text-center">
         <input
           type="text"
           placeholder="Enter GitHub username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setUsername(e.target.value.trim())}
+          className="border rounded p-2 text-xl m-3"
         />
-        <button type="submit">Search</button>
+        <button
+          type="submit"
+          className="border rounded p-2 m-3 text-xl bg-slate-400 border-slate-600 hover:bg-slate-500 transition duration-300 ease-in-out"
+        >
+          Search
+        </button>
       </form>
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <p className="text-red-500">{error}</p>}
       {userData && (
-        <div>
-          <img src={userData.avatar_url} alt={`${userData.login}'s avatar`} />
-          <p>Name: {userData.name}</p>
-          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">
+        <div className="text-center">
+          <img
+            src={userData.avatar_url}
+            alt={`${userData.login}'s avatar`}
+            className="flex justify-center items-center mx-auto w-32 h-32 rounded-full m-3"
+          />
+          <p className="text-xl font-semibold">Name: {userData.name}</p>
+          <a
+            href={userData.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-700"
+          >
             View Profile
           </a>
         </div>
