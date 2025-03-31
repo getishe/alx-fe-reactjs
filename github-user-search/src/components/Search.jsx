@@ -21,6 +21,12 @@ const Search = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //Validate username
+    if (!formData.username.trim()) {
+      setError("Please enter a username to search.");
+      return;
+    }
     setLoading(true);
     setError("");
     setSearchResults([]);
@@ -46,44 +52,64 @@ const Search = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <form
-        onSubmit={handleSubmit}
-        className="grid space-y-4 items-center justify-center w-full max-w-2xl sm:flex-row"
-      >
-        <input
-          type="text"
-          name="username"
-          placeholder="e.g., johndoe"
-          value={formData.username}
-          onChange={handleChange}
-          className="border rounded p-2 text-xl m-3"
-        />
-        <input
-          type="text"
-          name="location"
-          placeholder="e.g., San Francisco"
-          value={formData.location}
-          onChange={handleChange}
-          className="border rounded p-2 text-xl m-3"
-        />
-        <input
-          type="number"
-          name="minRepos"
-          placeholder="e.g., 10"
-          min="0"
-          value={formData.minRepos}
-          onChange={handleChange}
-          className="border rounded px-4 py-2 text-xl m-3"
-        />
+      <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-4">
+        <div className="flex flex-col">
+          <label htmlFor="username" className="mb-1 text-sm font-medium">
+            GitHub Username
+          </label>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            placeholder="e.g., johndoe"
+            value={formData.username}
+            onChange={handleChange}
+            className="border rounded p-2 text-xl"
+            required
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="location" className="mb-1 text-sm font-medium">
+            Location
+          </label>
+          <input
+            id="location"
+            type="text"
+            name="location"
+            placeholder="e.g., San Francisco"
+            value={formData.location}
+            onChange={handleChange}
+            className="border rounded p-2 text-xl"
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="minRepos" className="mb-1 text-sm font-medium">
+            Minimum Repositories
+          </label>
+          <input
+            id="minRepos"
+            type="number"
+            name="minRepos"
+            placeholder="e.g., 10"
+            min="0"
+            value={formData.minRepos}
+            onChange={handleChange}
+            className="border rounded p-2 text-xl"
+          />
+        </div>
         <button
           type="submit"
           disabled={loading}
-          className="border rounded p-2 m-3 text-xl bg-slate-400 border-slate-600 hover:bg-slate-500 transition duration-300 ease-in-out disabled:opacity-50"
+          className="w-full border rounded p-2 text-xl bg-slate-400 border-slate-600 hover:bg-slate-500 transition duration-300 ease-in-out disabled:opacity-50"
         >
           {loading ? "Searching..." : "Search"}
         </button>
       </form>
-
+      {loading && (
+        <div className="flex justify-center mt-8">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-slate-600"></div>
+        </div>
+      )}
       {error && <p className="text-red-500 text-center mt-4">{error}</p>}
 
       {searchResults.length > 0 && (
